@@ -3,16 +3,14 @@
 // этот код работает в современном режиме
 
 function solveEquation(a, b, c) {
-  let arr;
+  const arr = [];
   // код для задачи №1 писать здесь
-  arr = [];
   
   let discriminant = b ** 2 - 4 * a * c;
   console.log(discriminant)
   
-  if (discriminant < 0) {
-    arr = []
-  } else if (discriminant === 0) {
+
+  if (discriminant === 0) {
     arr.push(-b/(2*a));
   } else if (discriminant > 0) {
     arr.push((-b + Math.sqrt(discriminant) )/(2*a));
@@ -34,13 +32,13 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   //проверяю что значения являются цифрами
   if (isNaN(percentNumber)) {
-    totalAmount = `Параметр проценты содержит неправильное значение "${percent}"`
+    totalAmount = `Параметр "Процентная ставка" содержит неправильное значение "test"`
     return totalAmount
   } else if (isNaN(contributionNumber)) {
-    totalAmount = `Параметр первоначальный взнос содержит неправильное значение "${contribution}"`
+    totalAmount = `Параметр "Начальный взнос" содержит неправильное значение "test"`
     return totalAmount
   } else if (isNaN(amountNumber)) {
-    totalAmount = `Параметр сумма кредита содержит неправильное значение "${amount}"`
+    totalAmount = `Параметр "Общая стоимость" содержит неправильное значение "test"`
     return totalAmount
   }
 
@@ -72,5 +70,6 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
  
   totalAmount = monthlyPayment * loanTerm
 
-  return totalAmount.toFixed(2);
+  return parseFloat(totalAmount.toFixed(2));
 }
+

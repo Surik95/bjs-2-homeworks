@@ -1,14 +1,9 @@
-function compareArrays(arr1, arr2) {
-  let result;
-  
+function compareArrays(arr1, arr2) {  
   // Ваш код
-  if (arr1.length === arr2.length) {
-    result = arr1.every((item,index) => item[index] === item[index] ) ? true :  false;
-  }
-  return result; // boolean
-}
+   return arr1.length === arr2.length && arr1.every((item,index) => item === arr2[index]);
+  } // boolean
 
 function advancedFilter(arr) {
   // Ваш код
-  return arr.filter(item => (item > 0)).filter(item => item % 3 === 0).map(item => item * 10)  // array
+  return arr.filter(item => (item > 0)).filter(item => item % 3 === 0).map(item => item * 10);  // array
 }

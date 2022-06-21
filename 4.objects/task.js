@@ -13,7 +13,6 @@ Student.prototype.setSubject = function (subjectName) {
 // ваш код для остальных методов
   Student.prototype.addMark = function(mark) {
     //ваш код
-    this.marks;
     if(this.marks === undefined){ 
       // добавить первую оценку 
       this.marks = [mark]
@@ -30,7 +29,7 @@ Student.prototype.setSubject = function (subjectName) {
       this.marks = mark
       } else {
         // добавить вторую и последующие оценки в массив
-        this.marks = this.marks.contact(mark);
+        this.marks = this.marks(...mark);
       }
   }
 

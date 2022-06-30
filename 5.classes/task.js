@@ -125,7 +125,7 @@ class Student {
     getAverageBySubject(nameObject) {
         if (Object.keys(this.itemName).indexOf(nameObject) != -1) {
             let sum = this.itemName[nameObject].reduce((acc, item) => item + acc, 0);
-            return console.log(`Средний балл по предмету ${nameObject} ${Math.round((sum/this.itemName[nameObject].length) * 10) / 10}`);
+            return Math.round((sum/this.itemName[nameObject].length) * 10) / 10
         } else {
             return console.log(`Несуществующий предмет`)
         }
@@ -136,7 +136,7 @@ class Student {
         for (let i = 0; i < Object.keys(this.itemName).length; i += 1){
             sum += (this.itemName[Object.keys(this.itemName)[i]].reduce((acc, item) => item + acc, 0)) / Object.keys(this.itemName).length
         }
-        return console.log(`Средний балл по по всем предметам ${Math.round((sum / Object.keys(this.itemName).length) * 100) / 100}`)
+        return Math.round((sum / Object.keys(this.itemName).length) * 100) / 100
     }
 
     exclude(reason) {

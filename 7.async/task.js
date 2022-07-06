@@ -4,11 +4,7 @@ class AlarmClock {
         this.timerId = timerID;
     }
 
-    addClock(time, funcAction, id) {
-        let date;
-        let timeHours;
-        let timeMinuts;
-        
+    addClock(time, callback, id) {
         if (id === undefined) {
             throw new Error('error text');
         } 
@@ -20,7 +16,7 @@ class AlarmClock {
 
         this.alarmCollection.push({id, 
             time, 
-            callback : funcAction})
+            callback})
     }
 
     removeClock(id) {
@@ -31,10 +27,10 @@ class AlarmClock {
             }
         )
 
-        if (result) {
-            return true;
-        } else {
+        if (result === -1) {
             return false;
+        } else {
+            return true;
         }
       
     }
@@ -48,12 +44,12 @@ class AlarmClock {
     }
 
     start() {
-        let that = this
         function checkClock(alarm) {
-            if (alarm.time === that.getCurrentFormattedTime()) {
+            if (alarm.time === this.getCurrentFormattedTime()) {
                alarm.callback();
             }
         }
+        checkClock = checkClock.bind(this);
         if (this.timerId === null) {
             this.timerId = setInterval(() => {
                 (this.alarmCollection.forEach((item) => checkClock(item)))
@@ -75,7 +71,7 @@ class AlarmClock {
 
     clearAlarms() {
         this.stop();
-        this.alarmCollection.splice(0, this.alarmCollection.length);
+        this.alarmCollection = [];
     }
 }
 

@@ -18,11 +18,6 @@ class AlarmClock {
             return;
         }
 
-        //date = new Date;
-        //Number(timeHours = time[0] + time[1]);
-        //Number(timeMinuts = time[3] + time[4])
-        //time = date.setHours(timeHours, timeMinuts)
-
         this.alarmCollection.push({id, 
             time, 
             callback : funcAction})
@@ -30,7 +25,7 @@ class AlarmClock {
 
     removeClock(id) {
         let result = this.alarmCollection.filter((item, index, arr) => {
-                if (item.id = id) {
+                if (item.id === id) {
                     arr.splice(index, 1)
                 }
             }
@@ -53,13 +48,16 @@ class AlarmClock {
     }
 
     start() {
+        let that = this
         function checkClock(alarm) {
-            if (alarm.time === (() => this.getCurrentFormattedTime())) {
-                alarm.callback();
+            if (alarm.time === that.getCurrentFormattedTime()) {
+               alarm.callback();
             }
         }
         if (this.timerId === null) {
-            this.timerId = setInterval((this.alarmCollection.forEach((item) => checkClock(item))))
+            this.timerId = setInterval(() => {
+                (this.alarmCollection.forEach((item) => checkClock(item)))
+            }, 1000)
         }
     }
 
@@ -71,7 +69,8 @@ class AlarmClock {
     }
 
     printAlarms() {
-        this.alarmCollection.forEach((item) => console.log(item.id, item.time))
+        console.log(`Печать всех будильников в количестве ${this.alarmCollection.length}`);
+        this.alarmCollection.forEach((item,) => console.log(`Будильник №${item.id} заведен на ${item.time}`));
     }
 
     clearAlarms() {
@@ -87,12 +86,12 @@ function testCase() {
     let titimethird = settingTheTime(0, 2) 
     
  
-    phoneAlaram.addClock(time, () => comnsole.log('Пора вставать',), 1)
+    phoneAlaram.addClock(time, () => console.log('Пора вставать'), 1)
     phoneAlaram.addClock(timeSecond, () => {console.log('Давай вставай уже'); phoneAlaram.removeClock(2)}, 2)
     phoneAlaram.addClock(titimethird, () => {
         console.log('Вставай а то проспишь!');
-        phoneAlaram.clearAlarms;
-        phoneAlaram.printAlarms;
+        phoneAlaram.clearAlarms();
+        phoneAlaram.printAlarms();
     }, 3)
     
     
@@ -100,15 +99,16 @@ function testCase() {
  
     function  settingTheTime(hours = 0, minuts = 0) {
         let currentDate = new Date();
-        hours = currentDate.getHours() + hours < 10 ? `0${currentDate.getHours() + hours}` : `${currentDate.getHours() + hours}`;
-        minuts = currentDate.getMinutes() + minuts < 10 ? `0${currentDate.getMinutes() + minuts}` : `${currentDate.getMinutes() + minuts}`;
+        hours = currentDate.setHours(currentDate.getHours() + hours, currentDate.getMinutes() + minuts)
+        hours = currentDate.getHours() < 10 ? `0${currentDate.getHours()}` : `${currentDate.getHours()}`;
+        minuts = currentDate.getMinutes() < 10 ? `0${currentDate.getMinutes()}` : `${currentDate.getMinutes()}`;
        
         return `${hours}:${minuts}`;   
     }
 
 
     phoneAlaram.printAlarms()
-
+    phoneAlaram.start()
 }
 
 

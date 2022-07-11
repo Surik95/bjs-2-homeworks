@@ -20,18 +20,12 @@ class AlarmClock {
     }
 
     removeClock(id) {
-        let result = this.alarmCollection.filter((item, index, arr) => {
-                if (item.id === id) {
-                    arr.splice(index, 1)
-                }
-            }
-        )
+        const result = this.alarmCollection;
 
-        if (result === -1) {
-            return false;
-        } else {
-            return true;
-        }
+        this.alarmCollection = this.alarmCollection.filter(item => item.id !== id);
+
+        return result.length !== this.alarmCollection.length
+
       
     }
 

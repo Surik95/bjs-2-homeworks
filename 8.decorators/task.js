@@ -34,7 +34,7 @@ function debounceDecoratorNew(func, delay) {
   return function (...args){
     timeCall = Math.floor(performance.now() - timeStart)
     if (flug === null) {
-    console.log(func())
+    console.log(func(...args))
     flug = false  
     timeId = setTimeout(() => flug = true, 2000)
     } else if (!flug) {
@@ -65,7 +65,7 @@ function debounceDecorator2(func) {
   function wrapper(...args){
     timeCall = Math.floor(performance.now() - timeStart)
     if (flug === null) {
-    console.log(func())
+    console.log(func(...args))
     flug = false  
     timeId = setTimeout(() => flug = true, 2000)
     } else if (!flug) {
